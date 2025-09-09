@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px auto;
+        }
+        .message {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        You already have a rating for this news.
+    </div>
+
+   <a href="{% url 'home'  %}">  <button class="btn" onclick="goHome()">Go Home</button></a>
+
+    <script>
+        function goHome() {
+            // Redirect to the home page
+            window.location.href = "home.html";
+        }
+    </script>
+</body>
+</html>

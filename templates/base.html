@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Title{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a href="{% url 'home' %}" style="text-decoration: none;"> <h2 class="navbar-brand" style="font-size: 40px; color: #f7d50a;">The yellow day</h2></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}" style="font-size: 18px;">Home</a>
+                </li>
+                
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'see_my_profie' %}" style="font-size: 18px;">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Logout' %}" style="font-size: 18px;">Logout</a>
+                </li>
+
+                {% else %}
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sign_in' %}" style="font-size: 18px;">Login</a>
+                </li>
+                {% endif %}
+
+            </ul>
+
+            <form class="d-flex" method="post" action="{% url 'search_news' %}">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"  name="search_query">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+            <div class="dropdown ms-2">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filter
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <!-- List of categories to choose -->
+                    {% for i in category %}
+                    <li><a class="dropdown-item" href="{% url 'news_for_a_category' i.id %}" target="_blank" >{{i.category_name}}</a></li>
+                    {% endfor %}
+                    <!-- Add more categories as needed -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Content -->
+    <div class="container mt-4">
+        {% block content %}
+        <!-- Content of child templates will go here -->
+        {% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
