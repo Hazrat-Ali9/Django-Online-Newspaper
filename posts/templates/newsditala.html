@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Title{% endblock %}
+
+{% block content %}
+
+<div class="col">
+    <div class="card">
+        <img src="{{ single_news.image.url }}" class="card-img-top" alt="{{ single_news.title }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ single_news.headline }}</h5>
+            <p class="card-text">Rating: {{ single_news.rating }} out of 4</p>
+            <p class="card-text">Category: {{ single_news.categroy }}</p>
+            <p class="card-text">{{ single_news.created_at }}</p>
+            <p class="card-text">{{ single_news.description }}</p> <!-- Displaying the description -->
+            <a href="{% url 'rate_a_news' single_news.id %}">
+                <button class="btn btn-primary">Give Rating</button>
+            </a>
+            <!-- Adding the Details button -->
+        </div>
+    </div>
+</div>
+
+</br>
+</br>
+
+<h4 class="card-text" style="margin: auto;">Related news for this categrory </h4>
+
+</br>
+</br>
+
+{% for i in ralated_nwes %}
+
+<a href="{% url 'ditials_view' i.id %}"><h4> {{i.headline}} </h4></a>
+</br>
+
+{% endfor %}
+
+</br>
+</br>
+
+<h4 class="card-text" style="margin: auto;">total {{ all_rating_for_this_news|length }} user rating for this post </h4>
+
+</br>
+</br>
+
+{% for single_rating in  all_rating_for_this_news %}
+<div class="comment border rounded p-3">
+    <div class="user font-weight-bold">User: {{single_rating.user.first_name}}  {{single_rating.user.last_name}} </div>
+    <div class="date text-muted">Date: {{single_rating.created_at}} </div>
+    <div class="rating font-weight-bold text-success">Rating: {{single_rating.rating}}out of 4</div>
+    <div class="description mt-3">  
+        {{single_rating.descriptions}}
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

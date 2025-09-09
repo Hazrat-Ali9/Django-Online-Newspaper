@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edtor  Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Editor  Profile</h2>
+        <div class="form-group">
+            <label for="firstName">First Name: {{request.user.editor_profile.first_name}}</label>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name: {{request.user.editor_profile.last_name}}</label>
+        </div>
+
+        <div class="form-group">
+            <label >Phone number : {{request.user.editor_profile.phone_number}}</label>
+        </div>
+
+        <div class="form-group">
+            <label >NID : {{request.user.editor_profile.n_id }}</label>
+        </div>
+        
+        <div class="form-group">
+            <label >NID : {{request.user.editor_profile.n_id }}</label>
+        </div>
+
+        <div class="form-group">
+            <label >Educaton: {{request.user.editor_profile.educations  }}</label>
+        </div>
+
+        <div class="form-group">
+            <label >zip_code: {{request.user.editor_profile.zip_code  }}</label>
+        </div>
+        <div class="form-group">
+            <label >city : {{request.user.editor_profile.city   }}</label>
+        </div>
+        <div class="form-group">
+            <label >state : {{request.user.editor_profile.state   }}</label>
+        </div>
+        <div class="form-group">
+            <label >country: {{request.user.editor_profile.country  }}</label>
+        </div>
+
+        <div class="form-group">
+            <label > ragistraions_date: {{request.user.editor_profile.ragistraions_date  }}</label>
+        </div>
+        <div class="form-group">
+            <h3  style="color: aqua;"> Your profile Progress</h3>
+        </div>
+        <p>Total posts: {{ request.user.editor_profile.tota_posts }}</p>
+        <p>Total views:  {{ request.user.editor_profile.total_views_coutnt_for_thid_editor  }} </p>
+        <p>Avarage rating of post:  {{ request.user.editor_profile.ave_rating }}</p>
+
+       {% if yes_editor %}
+       <a href="{% url 'create_post' %}">  <button onclick="applyAsEditor()">Post a news</button></a>
+       <a href="{% url 'all_of_a_editor' %}">  <button onclick="applyAsEditor()">See my all Post</button></a>
+       
+       {% endif %}
+
+        <a href="{% url 'home' %}">  <button onclick="goHome()">Go Home</button></a>
+    </div>
+
+</body>
+</html>

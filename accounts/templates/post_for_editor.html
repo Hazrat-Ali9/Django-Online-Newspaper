@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MY post </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+{% if my_all_post|length %}
+
+    <div class="container" style="padding-top: 10px;">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+    
+            {% for single_news in my_all_post %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ single_news.image.url }}" class="card-img-top" alt="{{ single_news.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ single_news.headline }}</h5>
+                        <p class="card-text">Rating: {{ single_news.rating }} out of 4</p>
+                        <p class="card-text">Category: {{ single_news.categroy }}</p>
+                        <p class="card-text">{{ single_news.created_at }}</p>
+                        <p class="card-text">{{ single_news.short_descriptions }}</p>
+
+                        <!-- Adding the Rating button -->
+                        <a href="{% url 'update_a_post' single_news.id %}">
+                            <button class="btn btn-primary">EDit</button>
+                        </a>
+                        <!-- Adding the Details button -->
+                        <a href="{% url 'delete_a_post' single_news.id %}">
+                            <button class="btn btn-secondary">Delete </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+       
+            {% endfor %}
+    
+        </div>
+    </div>
+
+{% else %}
+
+<h1 style="width: 70%; margin: auto; margin-top: 10%;" > YUO CURRENTLY YOU DO NOT HAVE ANY POST </h1>
+
+{% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
