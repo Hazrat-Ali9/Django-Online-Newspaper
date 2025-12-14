@@ -6,7 +6,7 @@
             el.classList.remove('hidden');
         });
     }
-
+// actions js
     function hide(selector) {
         document.querySelectorAll(selector).forEach(function(el) {
             el.classList.add('hidden');
